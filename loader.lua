@@ -327,12 +327,12 @@ local function refreshExistingCrossaintUI()
     end
     if not root then return end
 
-    local bg = Color3.fromRGB(19, 14, 10)
-    local sideColor = Color3.fromRGB(26, 19, 16)
-    local panelColor = Color3.fromRGB(26, 19, 16)
-    local fieldColor = Color3.fromRGB(22, 17, 12)
-    local lineColor = Color3.fromRGB(74, 48, 32)
-    local accentColor = Color3.fromRGB(232, 147, 62)
+    local bg = Color3.fromRGB(14, 10, 7)
+    local sideColor = Color3.fromRGB(20, 14, 10)
+    local panelColor = Color3.fromRGB(22, 16, 11)
+    local fieldColor = Color3.fromRGB(18, 13, 9)
+    local lineColor = Color3.fromRGB(68, 44, 28)
+    local accentColor = Color3.fromRGB(230, 148, 55)
 
     local window, namedWindow, sidebar, largestArea
     largestArea = 0
@@ -39907,18 +39907,18 @@ function GUI.escape(value)
 end
 
 function GUI.theme(Airflow)
-    -- HinaHub warm-dark palette; GUI presentation only.
+    -- HinaHub premium dark palette; GUI presentation only.
     local theme = {
-        Background = Color3.fromHex("#130E0A"),
-        Surface = Color3.fromHex("#1A1310"),
-        Surface2 = Color3.fromHex("#211810"),
-        Surface3 = Color3.fromHex("#3D2615"),
-        Stroke = Color3.fromHex("#4A3020"),
-        StrokeHover = Color3.fromHex("#E8933E"),
-        Accent = Color3.fromHex("#E8933E"),
-        AccentDark = Color3.fromHex("#2A1A08"),
-        Text = Color3.fromHex("#F5EDE0"),
-        Muted = Color3.fromHex("#9A8070"),
+        Background = Color3.fromHex("#0E0A07"),
+        Surface = Color3.fromHex("#14100A"),
+        Surface2 = Color3.fromHex("#19130D"),
+        Surface3 = Color3.fromHex("#3A2410"),
+        Stroke = Color3.fromHex("#44301C"),
+        StrokeHover = Color3.fromHex("#E69437"),
+        Accent = Color3.fromHex("#E69437"),
+        AccentDark = Color3.fromHex("#231307"),
+        Text = Color3.fromHex("#F6EEE0"),
+        Muted = Color3.fromHex("#9A8268"),
     }
     Airflow.ThemePresets.Robscript = theme
     Airflow:SetDefaultTheme(theme)
@@ -40619,15 +40619,15 @@ function GUI.applyCrossaintVisuals()
 
     -- ── Palette ───────────────────────────────────────────────────────────────
     local col = {
-        bg        = Color3.fromRGB(19, 14, 10),
-        sidebar   = Color3.fromRGB(26, 19, 16),
-        panel     = Color3.fromRGB(26, 19, 16),
-        raised    = Color3.fromRGB(33, 24, 16),
-        field     = Color3.fromRGB(22, 17, 12),
-        line      = Color3.fromRGB(74, 48, 32),
-        bright    = Color3.fromRGB(232, 147, 62),
-        navSel    = Color3.fromRGB(55, 35, 18),
-        navAccent = Color3.fromRGB(232, 147, 62),
+        bg        = Color3.fromRGB(14, 10, 7),
+        sidebar   = Color3.fromRGB(20, 14, 10),
+        panel     = Color3.fromRGB(22, 16, 11),
+        raised    = Color3.fromRGB(28, 20, 13),
+        field     = Color3.fromRGB(18, 13, 9),
+        line      = Color3.fromRGB(68, 44, 28),
+        bright    = Color3.fromRGB(230, 148, 55),
+        navSel    = Color3.fromRGB(48, 30, 14),
+        navAccent = Color3.fromRGB(230, 148, 55),
     }
 
     -- ── Helpers ───────────────────────────────────────────────────────────────
