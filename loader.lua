@@ -327,12 +327,12 @@ local function refreshExistingCrossaintUI()
     end
     if not root then return end
 
-    local bg = Color3.fromRGB(7, 12, 23)
-    local sideColor = Color3.fromRGB(10, 18, 34)
-    local panelColor = Color3.fromRGB(13, 22, 40)
-    local fieldColor = Color3.fromRGB(11, 22, 40)
-    local lineColor = Color3.fromRGB(56, 94, 145)
-    local accentColor = Color3.fromRGB(68, 153, 255)
+    local bg = Color3.fromRGB(19, 14, 10)
+    local sideColor = Color3.fromRGB(26, 19, 16)
+    local panelColor = Color3.fromRGB(26, 19, 16)
+    local fieldColor = Color3.fromRGB(22, 17, 12)
+    local lineColor = Color3.fromRGB(74, 48, 32)
+    local accentColor = Color3.fromRGB(232, 147, 62)
 
     local window, namedWindow, sidebar, largestArea
     largestArea = 0
@@ -514,7 +514,7 @@ local function refreshExistingCrossaintUI()
         end
         if not active then active = nav[1] end
         local function paint(node, selected)
-            node.BackgroundColor3 = selected and Color3.fromRGB(24, 57, 96) or sideColor
+            node.BackgroundColor3 = selected and Color3.fromRGB(55, 35, 18) or sideColor
             node.BackgroundTransparency = selected and 0 or 1
             if selected then roundedBorder(node, accentColor, 0.38, 10) end
         end
@@ -39907,18 +39907,18 @@ function GUI.escape(value)
 end
 
 function GUI.theme(Airflow)
-    -- Screenshot-matched Crossaint palette; GUI presentation only.
+    -- HinaHub warm-dark palette; GUI presentation only.
     local theme = {
-        Background = Color3.fromHex("#03060B"),
-        Surface = Color3.fromHex("#060B14"),
-        Surface2 = Color3.fromHex("#09111D"),
-        Surface3 = Color3.fromHex("#1B314E"),
-        Stroke = Color3.fromHex("#2C4B73"),
-        StrokeHover = Color3.fromHex("#5795EB"),
-        Accent = Color3.fromHex("#3B82F6"),
-        AccentDark = Color3.fromHex("#172C47"),
-        Text = Color3.fromHex("#F4F7FC"),
-        Muted = Color3.fromHex("#9AAAC0"),
+        Background = Color3.fromHex("#130E0A"),
+        Surface = Color3.fromHex("#1A1310"),
+        Surface2 = Color3.fromHex("#211810"),
+        Surface3 = Color3.fromHex("#3D2615"),
+        Stroke = Color3.fromHex("#4A3020"),
+        StrokeHover = Color3.fromHex("#E8933E"),
+        Accent = Color3.fromHex("#E8933E"),
+        AccentDark = Color3.fromHex("#2A1A08"),
+        Text = Color3.fromHex("#F5EDE0"),
+        Muted = Color3.fromHex("#9A8070"),
     }
     Airflow.ThemePresets.Robscript = theme
     Airflow:SetDefaultTheme(theme)
@@ -40615,19 +40615,19 @@ function GUI.applyCrossaintVisuals()
         if uiRoot then break end
     end
     if not uiRoot then return false end
-    if uiRoot:GetAttribute("CrossaintVisualPolishedV8") then return true end
+    if uiRoot:GetAttribute("CrossaintVisualPolishedV7") then return true end
 
     -- ── Palette ───────────────────────────────────────────────────────────────
     local col = {
-        bg        = Color3.fromRGB(7, 12, 23),
-        sidebar   = Color3.fromRGB(10, 18, 34),
-        panel     = Color3.fromRGB(13, 22, 40),
-        raised    = Color3.fromRGB(19, 34, 57),
-        field     = Color3.fromRGB(11, 22, 40),
-        line      = Color3.fromRGB(56, 94, 145),
-        bright    = Color3.fromRGB(68, 153, 255),
-        navSel    = Color3.fromRGB(24, 57, 96),
-        navAccent = Color3.fromRGB(82, 165, 255),
+        bg        = Color3.fromRGB(19, 14, 10),
+        sidebar   = Color3.fromRGB(26, 19, 16),
+        panel     = Color3.fromRGB(26, 19, 16),
+        raised    = Color3.fromRGB(33, 24, 16),
+        field     = Color3.fromRGB(22, 17, 12),
+        line      = Color3.fromRGB(74, 48, 32),
+        bright    = Color3.fromRGB(232, 147, 62),
+        navSel    = Color3.fromRGB(55, 35, 18),
+        navAccent = Color3.fromRGB(232, 147, 62),
     }
 
     -- ── Helpers ───────────────────────────────────────────────────────────────
@@ -40721,7 +40721,7 @@ function GUI.applyCrossaintVisuals()
     if sidebar then
         sidebar.BackgroundColor3 = col.sidebar
         sidebar.BackgroundTransparency = 0   -- fully opaque, no ghosting
-        visualGradient(sidebar, Color3.fromRGB(18, 35, 64), col.sidebar)
+        visualGradient(sidebar, Color3.fromRGB(13, 24, 50), col.sidebar)
         -- Thin right-edge separator instead of a broad highlight
         local sep = sidebar:FindFirstChild("CrossaintSidebarEdge")
         if not sep then
@@ -40966,7 +40966,7 @@ function GUI.applyCrossaintVisuals()
     if header then
         header.BackgroundColor3 = col.field
         header.BackgroundTransparency = 0
-        visualGradient(header, Color3.fromRGB(23, 43, 74), col.field)
+        visualGradient(header, Color3.fromRGB(18, 34, 62), col.field)
         visualBorder(header, col.line, 0.52, 1)
     end
 
@@ -41095,23 +41095,16 @@ function GUI.applyCrossaintVisuals()
         if item:IsA("TextLabel") or item:IsA("TextButton")
             or item:IsA("TextBox") then
             local value = tostring(item.Text or "")
-            local lowerName = item.Name:lower()
-            local isTitle = lowerName:find("title", 1, true) ~= nil
+            local bold = item.TextSize >= 17
+                or item.Name:lower():find("title", 1, true) ~= nil
                 or value == "Crossaint Hub" or value == "Units"
-            local isSection = isTitle or item.TextSize >= 19
-            local weight = isTitle and Enum.FontWeight.Heavy
-                or isSection and Enum.FontWeight.Bold
-                or item:IsA("TextButton") and Enum.FontWeight.SemiBold
-                or Enum.FontWeight.Medium
+            local weight = bold and Enum.FontWeight.Bold or Enum.FontWeight.Medium
             local ok = pcall(function()
                 item.FontFace = Font.new(BRAND_FONT, weight)
             end)
             if not ok then
                 pcall(function()
-                    item.Font = isTitle and Enum.Font.GothamBlack
-                        or isSection and Enum.Font.GothamBold
-                        or item:IsA("TextButton") and Enum.Font.GothamSemibold
-                        or Enum.Font.GothamMedium
+                    item.Font = bold and Enum.Font.GothamBold or Enum.Font.GothamMedium
                 end)
             end
             if item:IsA("TextBox") and item.BackgroundTransparency < 0.99 then
@@ -41135,7 +41128,7 @@ function GUI.applyCrossaintVisuals()
     -- Only presentation properties, outlines, and selected-row styling are
     -- added. All existing button callbacks, tab flags, toggles, sliders,
     -- dropdowns, configuration keys, and navigation targets are preserved.
-    uiRoot:SetAttribute("CrossaintVisualPolishedV8", true)
+    uiRoot:SetAttribute("CrossaintVisualPolishedV7", true)
     return true
 end
 
@@ -41220,15 +41213,12 @@ local function _pressGlow(btn)
 end
 
 function GUI.applyCrossaintAnimations(uiRoot)
-    if not uiRoot or not uiRoot.Parent or uiRoot:GetAttribute("CrossaintAnimated") then return end
-
-    -- Resolve dependencies before marking the root. If TweenService is not
-    -- available yet, the caller's retry can safely attempt initialization again.
-    local ok, TweenService = pcall(game.GetService, game, "TweenService")
-    if not ok or not TweenService then return end
-
+    if not uiRoot or uiRoot:GetAttribute("CrossaintAnimated") then return end
     uiRoot:SetAttribute("CrossaintAnimated", true)
     GUI._animRoot = uiRoot
+
+    local ok, TweenService = pcall(game.GetService, game, "TweenService")
+    if not ok then return end
 
     -- ── 1. Ambient background: pool of slow-drifting dots ─────────────────
     -- Find the shell (largest Frame), create a canvas behind all content.
@@ -41388,6 +41378,21 @@ function GUI.applyCrossaintAnimations(uiRoot)
     _animConn(uiRoot.DescendantAdded, function(item)
         if item:IsA("Frame") then task.defer(function() pcall(bindPageFrame, item) end) end
     end)
+end
+
+-- Cleanup: cancel tweens and disconnect connections when the farm unloads.
+local _origUnload = App.unload
+App.unload = function()
+    for _, t in ipairs(GUI._animTweens or {})  do pcall(function() t:Cancel() end) end
+    for _, c in ipairs(GUI._animConns or {})   do pcall(function() c:Disconnect() end) end
+    for _, d in ipairs(GUI._ambientDots or {}) do pcall(function() d:Destroy() end) end
+    GUI._animTweens  = {}
+    GUI._animConns   = {}
+    GUI._ambientDots = {}
+    if GUI._animRoot then
+        pcall(function() GUI._animRoot:SetAttribute("CrossaintAnimated", nil) end)
+    end
+    return _origUnload()
 end
 
 function GUI.window(Airflow)
@@ -42448,22 +42453,22 @@ function GUI.build()
     do
         local Msc = Modes.eventNow()
         if Msc then
-            bsc:Section(Msc.hunt and "☀️ Summer Hunt" or Msc.name)
+            bsc:Section(Msc.hunt and "Summer Hunt" or Msc.name)
             dsc(Msc.name, Msc.about, {
                 "event"
             }, "onlyCoins")
         end
         if Msc and Msc.hunt then
             wrc.hunt = bsc:Paragraph("…")
-            vrc.huntCardsPick = bsc:Dropdown("🃏 Card Pick", "Which of the 3 cards to take each time. None that risks losing the run", Hunt.CARD_PICKS, table.find(Hunt.CARD_PICKS, Config.huntCards) or 1, function(Nsc)
+            vrc.huntCardsPick = bsc:Dropdown("Card Pick", "Which of the 3 cards to take each time. None that risks losing the run", Hunt.CARD_PICKS, table.find(Hunt.CARD_PICKS, Config.huntCards) or 1, function(Nsc)
                 xrc("huntCards", Nsc)
             end)
-            Arc(bsc, "✨ Smart Charm Equip", "Wears the Summer Charm that helps most before a Summer Hunt or a Sky portal: more rewards where your team wins with room to spare, more damage where it might lose", "smartCharm")
-            bsc:Section("🌴 Summer Skins and Stars")
+            Arc(bsc, "Smart Charm Equip", "Wears the Summer Charm that helps most before a Summer Hunt or a Sky portal: more rewards where your team wins with room to spare, more damage where it might lose", "smartCharm")
+            bsc:Section("Summer Skins and Stars")
             wrc.skins = bsc:Paragraph("…")
-            Arc(bsc, "👕 Smart Skins", "Puts Summer skins on your Hunt team and sells the spares listed above. Selling can't be undone", "skinSmart")
-            Arc(bsc, "⭐ Open Sunny Stars", "Spends Summer Pearls on stars for the need listed above, never below the pearls you keep", "starOpen")
-            Grc(bsc, "💎 Summer Pearls To Keep", "Stars never go below this. 105k pays for all the Merchant's stock", "pearlFloor", {
+            Arc(bsc, "Smart Skins", "Puts Summer skins on your Hunt team and sells the spares listed above. Selling can't be undone", "skinSmart")
+            Arc(bsc, "Open Sunny Stars", "Spends Summer Pearls on stars for the need listed above, never below the pearls you keep", "starOpen")
+            Grc(bsc, "Summer Pearls To Keep", "Stars never go below this. 105k pays for all the Merchant's stock", "pearlFloor", {
                 min = 0,
                 max = 300000,
                 step = 5000,
@@ -42471,7 +42476,7 @@ function GUI.build()
             })
         end
         if Msc and Msc.dealt then
-            bsc:Section("🎭 Fool's Hunt")
+            bsc:Section("Fool's Hunt")
             wrc.fh = bsc:Paragraph("…")
         end
     end
@@ -43766,26 +43771,6 @@ table.insert(App.conns, LocalPlayer.Idled:Connect(function()
 end))
 
 function App.cleanup()
-    -- GUI-only teardown: this is also called when another copy supersedes this
-    -- one, not just through App.unload. Stop decorative work and release every
-    -- animation connection so stale UI effects cannot outlive the window.
-    for _, tween in ipairs(GUI._animTweens or {}) do
-        pcall(function() tween:Cancel() end)
-    end
-    for _, connection in ipairs(GUI._animConns or {}) do
-        pcall(function() connection:Disconnect() end)
-    end
-    for _, dot in ipairs(GUI._ambientDots or {}) do
-        pcall(function() dot:Destroy() end)
-    end
-    GUI._animTweens = {}
-    GUI._animConns = {}
-    GUI._ambientDots = {}
-    if GUI._animRoot then
-        pcall(function() GUI._animRoot:SetAttribute("CrossaintAnimated", nil) end)
-        GUI._animRoot = nil
-    end
-
     for xxc, yxc in ipairs(App.conns) do
         pcall(function()
             yxc:Disconnect()
